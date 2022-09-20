@@ -6,5 +6,5 @@ env.read_env()
 telegram_token = env("TELEGRAM_TOKEN")
 
 bot = telegram.Bot(token=telegram_token)
-bot.send_message(chat_id='@img_universe', text="I'm sorry Dave I'm afraid I can't do that.")
+bot.send_photo(chat_id='@img_universe', photo=open('images/apod_0.jpg', 'rb'))
 print(bot.get_me())
