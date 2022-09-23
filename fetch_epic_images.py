@@ -26,14 +26,18 @@ def fetch_epic(nasa_token):
 
     Path("images").mkdir(parents=True, exist_ok=True)
     for url_img_number, url_img in enumerate(url_images):
-        filename = f'epic_{url_img_number}.png'
-        path = Path('images', filename)
-        time.sleep(1)
-        response = requests.get(url_img, headers=headers, params=payload)
-        response.raise_for_status()
+        download_img(url_img_number, url_img, payload, headers)
 
-        with open(path, 'wb') as file:
-            file.write(response.content)
+
+def download_img(url_img_number, url_img, payload, headers):
+    filename = f'epic_{url_img_number}.png'
+    path = Path('images', filename)
+    time.sleep(1)
+    response = requests.get(url_img, headers=headers, params=payload)
+    response.raise_for_status()
+
+    with open(path, 'wb') as file:
+        file.write(response.content)
 
 
 def main():
