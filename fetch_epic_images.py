@@ -3,6 +3,8 @@ from pathlib import Path
 import time
 import datetime
 from environs import Env
+from get_type_img import get_type_img
+from download_tool import download_img
 
 
 def fetch_epic(nasa_token):
@@ -26,18 +28,7 @@ def fetch_epic(nasa_token):
 
     Path("images").mkdir(parents=True, exist_ok=True)
     for url_img_number, url_img in enumerate(url_images):
-        download_img(url_img_number, url_img, payload, headers)
-
-
-def download_img(url_img_number, url_img, payload, headers):
-    filename = f'epic_{url_img_number}.png'
-    path = Path('images', filename)
-    time.sleep(1)
-    response = requests.get(url_img, headers=headers, params=payload)
-    response.raise_for_status()
-
-    with open(path, 'wb') as file:
-        file.write(response.content)
+        download_img(url_img_number, url_img, payload, headers, name='epic')
 
 
 def main():

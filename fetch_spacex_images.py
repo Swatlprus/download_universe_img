@@ -3,6 +3,7 @@ from pathlib import Path
 import time
 import argparse
 from get_type_img import get_type_img
+from download_tool import download_img
 
 def fetch_spacex_launch(id_launch):
     url = f'https://api.spacexdata.com/v5/launches/{id_launch}'
@@ -18,17 +19,7 @@ def fetch_spacex_launch(id_launch):
 
     Path("images").mkdir(parents=True, exist_ok=True)
     for url_img_number, url_img in enumerate(url_images):
-        download_img(url_img_number, url_img, headers)
-
-def download_img(url_img_number, url_img, headers):
-    filename = f'spacex_{url_img_number}{get_type_img(url_img)}'
-    path_image = Path('images', filename)
-    time.sleep(1)
-    response = requests.get(url_img, headers=headers)
-    response.raise_for_status()
-
-    with open(path_image, 'wb') as file:
-        file.write(response.content)
+        download_img(url_img_number, url_img, headers, name='spacex')
 
 
 def main():
