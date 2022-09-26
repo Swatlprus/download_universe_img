@@ -1,3 +1,4 @@
+from bz2 import compress
 import telegram
 import os
 from environs import Env
@@ -8,8 +9,6 @@ import argparse
 
 
 def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_images):
-    max_size_img = int(20971520)
-    small_resolution = (1600, 900)
     for root, dirs, files in os.walk(f'{path_to_images}'):
         pass
     bot = telegram.Bot(token=telegram_token)
@@ -17,9 +16,7 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
         random.shuffle(files)
         for file_img in files:
             path_file_img = os.path.join(path_to_images, file_img)
-            if os.path.getsize(path_file_img) > max_size_img:
-                with open(path_file_img, 'rb') as image:
-                    path_file_img = image.thumbnail(small_resolution)
+            compress_image(path_file_img)
             with open(path_file_img, 'rb') as photo:
                 try:
                     bot.send_photo(chat_id=telegram_chat_id, photo=photo)
@@ -29,6 +26,14 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
                         bot.send_photo(chat_id=telegram_chat_id, photo=photo)
             time.sleep(int(sleep_time))
 
+
+def compress_image():
+    max_size_img = int(20971520)
+    small_resolution = (1600, 900)
+    if os.path.getsize(path_file_img) > max_size_img:
+                with open(path_file_img, 'rb') as image:
+                    path_file_img = image.thumbnail(small_resolution)
+    return path_file_img
 
 def main():
     env = Env()
