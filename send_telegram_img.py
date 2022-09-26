@@ -35,7 +35,7 @@ def main():
     env.read_env()
     telegram_token = env("TELEGRAM_TOKEN")
     parser = argparse.ArgumentParser()
-    parser.add_argument('path_to_images')
+    parser.add_argument('--path_to_images', default='images')
     args = parser.parse_args()
     telegram_chat_id = env("TELEGRAM_CHAT_ID")
     if env("SLEEP_TIME"):
