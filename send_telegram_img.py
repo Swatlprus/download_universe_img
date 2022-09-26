@@ -13,21 +13,21 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
     for root, dirs, files in os.walk(f'{path_to_images}'):
         pass
     bot = telegram.Bot(token=telegram_token)
-    try:
-        while True:
-            random.shuffle(files)
-            for file_img in files:
-                path_file_img = os.path.join(path_to_images, file_img)
-                if os.path.getsize(path_file_img) > max_size_img:
-                    image = Image.open(path_file_img)
+    while True:
+        random.shuffle(files)
+        for file_img in files:
+            path_file_img = os.path.join(path_to_images, file_img)
+            if os.path.getsize(path_file_img) > max_size_img:
+                with open(path_file_img, 'rb') as image:
                     path_file_img = image.thumbnail(small_resolution)
-                with open(path_file_img, 'rb') as photo:
+            with open(path_file_img, 'rb') as photo:
+                try:
                     bot.send_photo(chat_id=telegram_chat_id, photo=photo)
-                time.sleep(int(sleep_time))
-    except telegram.error.NetworkError:
-        time.sleep(3)
-        with open(path_file_img, 'rb') as photo:
-            bot.send_photo(chat_id=telegram_chat_id, photo=photo)
+                except telegram.error.NetworkError:
+                    time.sleep(3)
+                    with open(path_file_img, 'rb') as photo:
+                        bot.send_photo(chat_id=telegram_chat_id, photo=photo)
+            time.sleep(int(sleep_time))
 
 
 def main():
