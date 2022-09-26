@@ -1,8 +1,6 @@
 import requests
 from pathlib import Path
-import time
 from environs import Env
-from get_type_img import get_type_img
 from download_tool import download_img
 
 def fetch_apod(nasa_token, count_apod):
@@ -19,11 +17,7 @@ def fetch_apod(nasa_token, count_apod):
     for apod in response_apod:
         if apod['media_type'] == 'image':
             url_images.append(apod['url'])
-
-    Path("images").mkdir(parents=True, exist_ok=True)
-    for url_img_number, url_img in enumerate(url_images):
-        download_img(url_img_number, url_img, headers, name='apod')
-
+    download_img(url_images, headers, payload={}, name='apod')
 
 def main():
     env = Env()

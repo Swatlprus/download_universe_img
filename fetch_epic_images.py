@@ -1,9 +1,7 @@
 import requests
 from pathlib import Path
-import time
 import datetime
 from environs import Env
-from get_type_img import get_type_img
 from download_tool import download_img
 
 
@@ -25,11 +23,8 @@ def fetch_epic(nasa_token):
         date_image_for_link = date_image.strftime('%Y/%m/%d')
         link_on_EPIC = f'https://api.nasa.gov/EPIC/archive/natural/{date_image_for_link}/png/{name_image}.png'
         url_images.append(link_on_EPIC)
-
-    Path("images").mkdir(parents=True, exist_ok=True)
-    for url_img_number, url_img in enumerate(url_images):
-        download_img(url_img_number, url_img, payload, headers, name='epic')
-
+    download_img(url_images, headers, payload, name='epic')
+    
 
 def main():
     env = Env()
