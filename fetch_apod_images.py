@@ -14,9 +14,7 @@ def fetch_apod(nasa_token, count_apod):
     response.raise_for_status()
     url_images = []
     response_apod = response.json()
-    for apod in response_apod:
-        if apod['media_type'] == 'image':
-            url_images.append(apod['url'])
+    url_images = [apod['url'] for apod in response_apod if apod['media_type'] == 'image']
     download_img(url_images, headers, payload={}, name='apod')
 
 def main():
