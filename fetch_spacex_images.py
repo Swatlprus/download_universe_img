@@ -3,8 +3,8 @@ from pathlib import Path
 import argparse
 from download_tool import download_img
 
-def fetch_spacex_launch(id_launch):
-    url = f'https://api.spacexdata.com/v5/launches/{id_launch}'
+def fetch_spacex_launch(launch_id):
+    url = f'https://api.spacexdata.com/v5/launches/{launch_id}'
     headers = {
         'User-Agent':
         'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36',
@@ -18,9 +18,9 @@ def fetch_spacex_launch(id_launch):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--id_launch', default='latest')
+    parser.add_argument('--launch_id', default='latest')
     args = parser.parse_args()
-    fetch_spacex_launch(args.id_launch)
+    fetch_spacex_launch(args.launch_id)
 
 
 if __name__ == '__main__':

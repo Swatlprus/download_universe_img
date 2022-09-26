@@ -1,4 +1,3 @@
-import re
 import telegram
 import os
 from environs import Env
@@ -8,7 +7,7 @@ import time
 import argparse
 
 
-def post_img_telegram(time_sleep, telegram_token, chat_id_telegram, path_to_images):
+def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_images):
     max_size_img = int(20971520)
     small_resolution = (1600, 900)
     for root, dirs, files in os.walk(f'{path_to_images}'):
@@ -23,12 +22,12 @@ def post_img_telegram(time_sleep, telegram_token, chat_id_telegram, path_to_imag
                     image = Image.open(path_file_img)
                     path_file_img = image.thumbnail(small_resolution)
                 with open(path_file_img, 'rb') as photo:
-                    bot.send_photo(chat_id=chat_id_telegram, photo=photo)
-                time.sleep(int(time_sleep))
+                    bot.send_photo(chat_id=telegram_chat_id, photo=photo)
+                time.sleep(int(sleep_time))
     except telegram.error.NetworkError:
         time.sleep(3)
         with open(path_file_img, 'rb') as photo:
-            bot.send_photo(chat_id=chat_id_telegram, photo=photo)
+            bot.send_photo(chat_id=telegram_chat_id, photo=photo)
 
 
 def main():
@@ -38,12 +37,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('path_to_images')
     args = parser.parse_args()
-    chat_id_telegram = env("CHAT_ID_TELEGRAM")
-    if env("TIME_SLEEP"):
-        time_sleep = env("TIME_SLEEP")
+    telegram_chat_id = env("TELEGRAM_CHAT_ID")
+    if env("SLEEP_TIME"):
+        sleep_time = env("SLEEP_TIME")
     else:
-        time_sleep = 14400
-    post_img_telegram(time_sleep, telegram_token, chat_id_telegram, args.path_to_images)
+        sleep_time = 14400
+    post_img_telegram(sleep_time, telegram_token, telegram_chat_id, args.path_to_images)
 
 
 if __name__ == '__main__':
