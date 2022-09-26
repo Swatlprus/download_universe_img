@@ -20,9 +20,9 @@ Python уже должен быть установлен
 Пример содержимого файла `.env`
 
 ```NASA_TOKEN='123456789123456789'```  
-```TELEGRAM_TOKEN = '123456789123456789'```  
-```SLEEP_TIME = 60```  
-```TELEGRAM_CHAT_ID = '@name_channel'```  
+```TELEGRAM_TOKEN='123456789123456789'```  
+```SLEEP_TIME=60```  
+```TELEGRAM_CHAT_ID='@name_channel'```  
 
 SLEEP_TIME - пауза между отправками фотографии указывается в секундах. По умолчанию 4 часа - 14400 секунд.  
 TELEGRAM_CHAT_ID - ID Telegram канала, можно указать в числовом виде или через символ `@`  
