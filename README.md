@@ -12,17 +12,22 @@ get_type_img.py - Выдает тип файла по URL-ссылке
 Python уже должен быть установлен
 Затем используйте `pip` для установки зависимостей
 
-```pip install -r requirements.txt```
+```
+pip install -r requirements.txt
+```  
 
 Не забудьте создать файл для переменных окружения `.env` и прописать туда ваш токен от сервиса https://api.nasa.gov/  
+
 `TELEGRAM_TOKEN` - Токен вашего бота в Telegram  
 
 Пример содержимого файла `.env`
 
-```NASA_TOKEN='123456789123456789'```  
-```TELEGRAM_TOKEN='123456789123456789'```  
-```SLEEP_TIME=60```  
-```TELEGRAM_CHAT_ID='@name_channel'```  
+```
+NASA_TOKEN='123456789123456789' 
+TELEGRAM_TOKEN='123456789123456789'
+SLEEP_TIME=60
+TELEGRAM_CHAT_ID='@name_channel'
+```
 
 SLEEP_TIME - пауза между отправками фотографии указывается в секундах. По умолчанию 4 часа - 14400 секунд.  
 TELEGRAM_CHAT_ID - ID Telegram канала, можно указать в числовом виде или через символ `@`  
@@ -33,19 +38,27 @@ TELEGRAM_CHAT_ID - ID Telegram канала, можно указать в чис
 
 Запуск из терминала Linux с указанием папки с изображениями (необязательное поле, по умолчанию название папки images)
 
-```python3 send_telegram_img.py images```
+```
+python3 send_telegram_img.py images
+```  
 
 Запуск отдельных скриптов по скачиванию изображений  
 
-```python3 fetch_apod_images.py apod_amount```  
+```
+python3 fetch_apod_images.py apod_amount
+```  
 
 Где apod_amount - количество фотографии, которые нужно скачать. Необязательное поле, по умолчанию значение 30.  
 
-```python3 fetch_spacex_images.py launch_id```  
+```
+python3 fetch_spacex_images.py launch_id
+```  
 
 `launch_id` - это ID запуска корабля SpaceX. Если не будет указано значение, то возьметься последний запуск.  
 
-```python3 fetch_epic_images.py```  
+```
+python3 fetch_epic_images.py
+```  
 
 
 ### Цель проекта
