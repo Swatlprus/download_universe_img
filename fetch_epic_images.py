@@ -1,7 +1,7 @@
 import requests
 import datetime
 from environs import Env
-from work_with_img import download_img
+from work_with_img import create_path
 
 
 def fetch_epic(nasa_api_token):
@@ -17,7 +17,7 @@ def fetch_epic(nasa_api_token):
         date_image_for_link = image_date.strftime('%Y/%m/%d')
         link_on_EPIC = f'https://api.nasa.gov/EPIC/archive/natural/{date_image_for_link}/png/{image_name}.png'
         images_url.append(link_on_EPIC)
-    download_img(images_url, payload, name='epic')
+    create_path(images_url, payload, name='epic')
     
 
 def main():

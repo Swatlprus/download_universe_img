@@ -14,7 +14,7 @@ def get_type_img(url):
     return file_extension
 
 
-def download_img(images_url, payload, name):
+def create_path(images_url, payload, name):
     Path("images").mkdir(parents=True, exist_ok=True)
     for img_number, url_img in enumerate(images_url):
         if name=='epic':
@@ -23,10 +23,12 @@ def download_img(images_url, payload, name):
             filename = f'spacex_{img_number}{get_type_img(url_img)}'
         elif name=='apod':
             filename = f'apod_{img_number}{get_type_img(url_img)}'
-        path = Path('images', filename)
-        time.sleep(1)
-        response = requests.get(url_img, params=payload)
-        response.raise_for_status()
+        download_img(filename, url_img, payload)
 
-        with open(path, 'wb') as file:
-            file.write(response.content)
+def download_img(filename, url_img, payload):
+    path = Path('images', filename)
+    time.sleep(1)
+    response = requests.get(url_img, params=payload)
+    response.raise_for_status()
+    with open(path, 'wb') as file:
+        file.write(response.content)
