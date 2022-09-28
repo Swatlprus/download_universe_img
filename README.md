@@ -45,10 +45,10 @@ python3 send_telegram_img.py images
 Запуск отдельных скриптов по скачиванию изображений  
 
 ```
-python3 fetch_apod_images.py apod_amount
+python3 fetch_apod_images.py number
 ```  
 
-Где apod_amount - количество фотографии, которые нужно скачать. Необязательное поле, по умолчанию значение 30.  
+Где number - количество фотографии, которые нужно скачать. Необязательное поле, по умолчанию значение 15.  
 
 ```
 python3 fetch_spacex_images.py launch_id

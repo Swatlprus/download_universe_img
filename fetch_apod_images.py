@@ -3,9 +3,9 @@ import argparse
 from environs import Env
 from download_tool import download_img
 
-def fetch_apod(nasa_token, apod_amount):
+def fetch_apod(nasa_api_token, apod_amount):
     url = 'https://api.nasa.gov/planetary/apod'
-    payload = {'api_key': nasa_token, 'count': int(apod_amount), 'thumbs': True}
+    payload = {'api_key': nasa_api_token, 'count': int(apod_amount), 'thumbs': True}
     response = requests.get(url, params=payload)
     response.raise_for_status()
     url_images = []
@@ -15,12 +15,12 @@ def fetch_apod(nasa_token, apod_amount):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--apod_amount', default=30)
+    parser.add_argument('--number', default=15)
     args = parser.parse_args()
     env = Env()
     env.read_env()
-    nasa_token = env("NASA_TOKEN")
-    fetch_apod(nasa_token, args.apod_amount)
+    nasa_api_token = env("NASA_API_TOKEN")
+    fetch_apod(nasa_api_token, args.number)
 
 
 if __name__ == '__main__':

@@ -4,9 +4,9 @@ from environs import Env
 from download_tool import download_img
 
 
-def fetch_epic(nasa_token):
+def fetch_epic(nasa_api_token):
     url = 'https://api.nasa.gov/EPIC/api/natural'
-    payload = {'api_key': nasa_token}
+    payload = {'api_key': nasa_api_token}
     response = requests.get(url, params=payload)
     response.raise_for_status()
     url_images = []
@@ -23,8 +23,8 @@ def fetch_epic(nasa_token):
 def main():
     env = Env()
     env.read_env()
-    nasa_token = env("NASA_TOKEN")
-    fetch_epic(nasa_token)
+    nasa_api_token = env("NASA_API_TOKEN")
+    fetch_epic(nasa_api_token)
 
 
 if __name__ == '__main__':

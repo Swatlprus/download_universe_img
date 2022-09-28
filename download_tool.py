@@ -5,13 +5,13 @@ from pathlib import Path
 
 def download_img(url_images, payload, name):
     Path("images").mkdir(parents=True, exist_ok=True)
-    for url_img_number, url_img in enumerate(url_images):
+    for img_number, url_img in enumerate(url_images):
         if name=='epic':
-            filename = f'epic_{url_img_number}.png'
+            filename = f'epic_{img_number}.png'
         elif name=='spacex':
-            filename = f'spacex_{url_img_number}{get_type_img(url_img)}'
+            filename = f'spacex_{img_number}{get_type_img(url_img)}'
         elif name=='apod':
-            filename = f'apod_{url_img_number}{get_type_img(url_img)}'
+            filename = f'apod_{img_number}{get_type_img(url_img)}'
         path = Path('images', filename)
         time.sleep(1)
         response = requests.get(url_img, params=payload)
