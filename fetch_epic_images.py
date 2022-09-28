@@ -1,5 +1,4 @@
 import requests
-from pathlib import Path
 import datetime
 from environs import Env
 from download_tool import download_img

@@ -1,8 +1,6 @@
-from bz2 import compress
 import telegram
 import os
 from environs import Env
-from PIL import Image
 import random
 import time
 import argparse

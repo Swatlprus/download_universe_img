@@ -1,6 +1,5 @@
 import requests
 import argparse
-from pathlib import Path
 from environs import Env
 from download_tool import download_img
 
