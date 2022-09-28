@@ -9,15 +9,15 @@ def fetch_epic(nasa_api_token):
     payload = {'api_key': nasa_api_token}
     response = requests.get(url, params=payload)
     response.raise_for_status()
-    url_images = []
+    images_url = []
     response_earth = response.json()
     for earth in response_earth:
-        name_image = earth['image']
-        date_image = datetime.datetime.fromisoformat(earth['date'])
-        date_image_for_link = date_image.strftime('%Y/%m/%d')
-        link_on_EPIC = f'https://api.nasa.gov/EPIC/archive/natural/{date_image_for_link}/png/{name_image}.png'
-        url_images.append(link_on_EPIC)
-    download_img(url_images, payload, name='epic')
+        image_name = earth['image']
+        image_date = datetime.datetime.fromisoformat(earth['date'])
+        date_image_for_link = image_date.strftime('%Y/%m/%d')
+        link_on_EPIC = f'https://api.nasa.gov/EPIC/archive/natural/{date_image_for_link}/png/{image_name}.png'
+        images_url.append(link_on_EPIC)
+    download_img(images_url, payload, name='epic')
     
 
 def main():

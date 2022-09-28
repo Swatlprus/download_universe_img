@@ -12,8 +12,8 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
     bot = telegram.Bot(token=telegram_token)
     while True:
         random.shuffle(files)
-        for file_img in files:
-            path_file_img = os.path.join(path_to_images, file_img)
+        for img_file in files:
+            path_file_img = os.path.join(path_to_images, img_file)
             compress_image(path_file_img)
             with open(path_file_img, 'rb') as photo:
                 try:

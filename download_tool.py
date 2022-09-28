@@ -3,9 +3,9 @@ import requests
 from get_type_img import get_type_img
 from pathlib import Path
 
-def download_img(url_images, payload, name):
+def download_img(images_url, payload, name):
     Path("images").mkdir(parents=True, exist_ok=True)
-    for img_number, url_img in enumerate(url_images):
+    for img_number, url_img in enumerate(images_url):
         if name=='epic':
             filename = f'epic_{img_number}.png'
         elif name=='spacex':
