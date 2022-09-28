@@ -1,7 +1,7 @@
 import requests
 import datetime
 from environs import Env
-from download_tool import download_img
+from work_with_img import download_img
 
 
 def fetch_epic(nasa_api_token):

@@ -1,6 +1,6 @@
 import requests
 import argparse
-from download_tool import download_img
+from work_with_img import download_img
 
 def fetch_spacex_launch(launch_id):
     url = f'https://api.spacexdata.com/v5/launches/{launch_id}'

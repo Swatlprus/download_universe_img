@@ -1,7 +1,7 @@
 import requests
 import argparse
 from environs import Env
-from download_tool import download_img
+from work_with_img import download_img
 
 def fetch_apod(nasa_api_token, apod_amount):
     url = 'https://api.nasa.gov/planetary/apod'
