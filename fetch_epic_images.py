@@ -7,13 +7,8 @@ from download_tool import download_img
 
 def fetch_epic(nasa_token):
     url = 'https://api.nasa.gov/EPIC/api/natural'
-    headers = {
-        'User-Agent':
-        'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36',
-    }
     payload = {'api_key': nasa_token}
-
-    response = requests.get(url, headers=headers, params=payload)
+    response = requests.get(url, params=payload)
     response.raise_for_status()
     url_images = []
     response_earth = response.json()
@@ -23,7 +18,7 @@ def fetch_epic(nasa_token):
         date_image_for_link = date_image.strftime('%Y/%m/%d')
         link_on_EPIC = f'https://api.nasa.gov/EPIC/archive/natural/{date_image_for_link}/png/{name_image}.png'
         url_images.append(link_on_EPIC)
-    download_img(url_images, headers, payload, name='epic')
+    download_img(url_images, payload, name='epic')
     
 
 def main():

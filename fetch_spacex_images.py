@@ -5,15 +5,11 @@ from download_tool import download_img
 
 def fetch_spacex_launch(launch_id):
     url = f'https://api.spacexdata.com/v5/launches/{launch_id}'
-    headers = {
-        'User-Agent':
-        'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36',
-    }
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
     response.raise_for_status()
     response_spacex_launch = response.json()
     url_images = response_spacex_launch['links']['flickr']['original']
-    download_img(url_images, headers, payload={}, name='spacex')
+    download_img(url_images, payload={}, name='spacex')
 
 
 def main():
