@@ -27,7 +27,6 @@ def create_path(images_url, payload, name):
 
 def download_img(filename, url_img, payload):
     path = Path('images', filename)
-    time.sleep(1)
     response = requests.get(url_img, params=payload)
     response.raise_for_status()
     with open(path, 'wb') as file:
