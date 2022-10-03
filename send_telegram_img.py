@@ -23,7 +23,7 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
             time.sleep(int(sleep_time))
 
 
-def compress_image():
+def compress_image(path_file_img):
     max_size_img = int(20971520)
     small_resolution = (1600, 900)
     if os.path.getsize(path_file_img) > max_size_img:
