@@ -20,6 +20,7 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
                     bot.send_photo(chat_id=telegram_chat_id, photo=photo)
                 except telegram.error.NetworkError:
                     print('Error Telegram Connection')
+                    time.sleep(15)
             time.sleep(int(sleep_time))
 
 
