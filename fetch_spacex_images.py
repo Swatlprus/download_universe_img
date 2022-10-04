@@ -1,15 +1,19 @@
 import requests
 import argparse
-from work_with_img import download_img
-from work_with_img import create_path
+from work_with_img import download_img, get_type_img
 
 def fetch_spacex_launch(launch_id):
     url = f'https://api.spacexdata.com/v5/launches/{launch_id}'
     response = requests.get(url)
     response.raise_for_status()
     response_spacex_launch = response.json()
-    images_url = response_spacex_launch['links']['flickr']['original']
-    create_path(images_url, payload={}, name='spacex')
+    image_paths = []
+    images_url =[]
+    for img_number, url_img in enumerate(response_spacex_launch['links']['flickr']['original']):
+        images_url.append(url_img)
+        filename = f'spacex_{img_number}{get_type_img(url_img)}'
+        image_paths.append(filename)
+    download_img(images_url, image_paths, payload={})
 
 
 def main():

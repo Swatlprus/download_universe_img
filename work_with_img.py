@@ -14,20 +14,11 @@ def get_type_img(url):
     return file_extension
 
 
-def create_path(images_url, payload, name):
+def download_img(images_url, image_paths, payload):
     Path("images").mkdir(parents=True, exist_ok=True)
-    for img_number, url_img in enumerate(images_url):
-        if name=='epic':
-            filename = f'epic_{img_number}.png'
-        elif name=='spacex':
-            filename = f'spacex_{img_number}{get_type_img(url_img)}'
-        elif name=='apod':
-            filename = f'apod_{img_number}{get_type_img(url_img)}'
-        download_img(filename, url_img, payload)
-
-def download_img(filename, url_img, payload):
-    path = Path('images', filename)
-    response = requests.get(url_img, params=payload)
-    response.raise_for_status()
-    with open(path, 'wb') as file:
-        file.write(response.content)
+    for url_img, filename in zip(images_url, image_paths):
+        path = Path('images', filename)
+        response = requests.get(url_img, params=payload)
+        response.raise_for_status()
+        with open(path, 'wb') as file:
+            file.write(response.content)

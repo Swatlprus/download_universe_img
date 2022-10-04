@@ -2,7 +2,7 @@ from venv import create
 import requests
 import argparse
 from environs import Env
-from work_with_img import create_path
+from work_with_img import download_img, get_type_img
 
 
 def fetch_apod(nasa_api_token, apod_amount):
@@ -11,9 +11,14 @@ def fetch_apod(nasa_api_token, apod_amount):
     response = requests.get(url, params=payload)
     response.raise_for_status()
     images_url = []
+    image_paths = []
     response_apod = response.json()
-    images_url = [apod['url'] for apod in response_apod if apod['media_type'] == 'image']
-    create_path(images_url, payload={}, name='apod')
+    for img_number, apod in enumerate(response_apod):
+        if apod['media_type']=='image':
+            images_url.append(apod['url'])
+            filename = f'apod_{img_number}{get_type_img(apod["url"])}'
+            image_paths.append(filename)
+    download_img(images_url, image_paths, payload={})
 
 def main():
     parser = argparse.ArgumentParser()
