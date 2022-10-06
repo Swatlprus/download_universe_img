@@ -18,7 +18,7 @@ def fetch_apod(nasa_api_token, apod_amount):
             image_urls.append(apod['url'])
             filename = f'apod_{img_number}{get_type_img(apod["url"])}'
             image_paths.append(filename)
-    download_imgs(image_urls, image_paths, payload={})
+    download_imgs(image_urls, image_paths)
 
 def main():
     parser = argparse.ArgumentParser()

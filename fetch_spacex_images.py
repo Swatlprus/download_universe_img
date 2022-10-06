@@ -13,7 +13,7 @@ def fetch_spacex_launch(launch_id):
         image_urls.append(url_img)
         filename = f'spacex_{img_number}{get_type_img(url_img)}'
         image_paths.append(filename)
-    download_imgs(image_urls, image_paths, payload={})
+    download_imgs(image_urls, image_paths)
 
 
 def main():
