@@ -14,9 +14,9 @@ def get_type_img(url):
     return file_extension
 
 
-def download_img(images_url, image_paths, payload):
+def download_imgs(image_urls, image_paths, payload):
     Path("images").mkdir(parents=True, exist_ok=True)
-    for url_img, filename in zip(images_url, image_paths):
+    for url_img, filename in zip(image_urls, image_paths):
         path = Path('images', filename)
         response = requests.get(url_img, params=payload)
         response.raise_for_status()
