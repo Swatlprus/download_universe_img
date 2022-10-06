@@ -1,4 +1,3 @@
-from venv import create
 import requests
 import argparse
 from environs import Env
