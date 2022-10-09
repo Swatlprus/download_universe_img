@@ -22,7 +22,7 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
                     time.sleep(15)
             time.sleep(int(sleep_time))
 
-def collect_img(path_to_images):
+def collect_imgs(path_to_images):
     path_imgs = []
     for root, dirs, files in os.walk(f'{path_to_images}'):
         pass
