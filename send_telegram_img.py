@@ -24,7 +24,7 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
 
 def collect_files(path_to_images):
     path_imgs = []
-    for root, dirs, files in os.walk(f'{path_to_images}'):
+    for root, dirs, files in os.walk(path_to_images):
         pass
     for img_file in files:
             path_file_img = os.path.join(path_to_images, img_file)
