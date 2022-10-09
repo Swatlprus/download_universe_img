@@ -1,6 +1,7 @@
 import telegram
 import os
 from environs import Env
+from PIL import Image
 import random
 import time
 import argparse
@@ -30,12 +31,17 @@ def collect_img(path_to_images):
             path_imgs.append(path_file_img)
     return path_imgs
 
+def load_image(path) -> Image:
+    with Image.open(path) as fd:
+        fd.load()
+        return fd
+
 def compress_image(path_file_img):
     max_size_img = 20971520
     small_resolution = (1600, 900)
     if os.path.getsize(path_file_img) > max_size_img:
-                with open(path_file_img, 'rb') as image:
-                    path_file_img = image.thumbnail(small_resolution)
+        image = load_image(path_file_img)
+        path_file_img = image.thumbnail(small_resolution)
     return path_file_img
 
 def main():
