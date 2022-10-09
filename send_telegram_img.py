@@ -52,10 +52,7 @@ def main():
     parser.add_argument('--path_to_images', default='images')
     args = parser.parse_args()
     telegram_chat_id = env("TELEGRAM_CHAT_ID")
-    try:
-        sleep_time = env("SLEEP_TIME")
-    except ValueError:
-        sleep_time = 14400
+    sleep_time = env("SLEEP_TIME", 14400)
     post_img_telegram(sleep_time, telegram_token, telegram_chat_id, args.path_to_images)
 
 
