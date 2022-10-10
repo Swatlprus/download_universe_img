@@ -22,12 +22,11 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
                     time.sleep(15)
             time.sleep(int(sleep_time))
 
-def collect_files(path_to_images):
+def collect_files(path_to_files):
     path_imgs = []
-    for root, dirs, files in os.walk(path_to_images):
-        pass
-    for img_file in files:
-            path_file_img = os.path.join(path_to_images, img_file)
+    for root, dirs, files in os.walk(path_to_files):
+        for name in files:
+            path_file_img  = os.path.join(root, name)
             path_imgs.append(path_file_img)
     return path_imgs
 
@@ -41,7 +40,8 @@ def compress_image(path_file_img):
     small_resolution = (1600, 900)
     if os.path.getsize(path_file_img) > max_size_img:
         image = load_image(path_file_img)
-        path_file_img = image.thumbnail(small_resolution)
+        image.thumbnail(small_resolution)
+        image.save(path_file_img)
     return path_file_img
 
 def main():
