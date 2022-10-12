@@ -5,6 +5,7 @@ from PIL import Image
 import random
 import time
 import argparse
+import tempfile
 
 
 def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_images):
@@ -13,8 +14,9 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
     while True:
         random.shuffle(path_imgs)
         for img_file in path_imgs:
-            compress_image(img_file)
-            with open(img_file, 'rb') as photo:
+            tmp_img_file = compress_image(img_file)
+            print('tmp_img_file', tmp_img_file)
+            with open(tmp_img_file, 'rb') as photo:
                 try:
                     bot.send_photo(chat_id=telegram_chat_id, photo=photo)
                 except telegram.error.NetworkError:
@@ -41,8 +43,9 @@ def compress_image(path_file_img):
     if os.path.getsize(path_file_img) > max_size_img:
         image = load_image(path_file_img)
         image.thumbnail(small_resolution)
-        image.save(path_file_img)
-    return path_file_img
+        with tempfile.NamedTemporaryFile(mode='w+b', suffix='.jpg', delete=False) as fp:
+            image.save(fp)
+            return fp.name
 
 def main():
     env = Env()
