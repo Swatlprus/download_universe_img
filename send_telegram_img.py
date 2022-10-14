@@ -15,7 +15,6 @@ def post_img_telegram(sleep_time, telegram_token, telegram_chat_id, path_to_imag
         random.shuffle(path_imgs)
         for img_file in path_imgs:
             tmp_img_file = compress_image(img_file)
-            print("tmp_img_file", tmp_img_file)
             with open(tmp_img_file, "rb") as photo:
                 try:
                     bot.send_photo(chat_id=telegram_chat_id, photo=photo)
