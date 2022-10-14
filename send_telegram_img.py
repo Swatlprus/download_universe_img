@@ -48,7 +48,10 @@ def compress_image(path_file_img):
         image.thumbnail(small_resolution)
         with tempfile.NamedTemporaryFile(mode="w+b", suffix=".jpg", delete=False) as fp:
             image.save(fp)
-            return fp.name
+            path_file = fp.name
+    else:
+        path_file = path_file_img
+    return path_file
 
 
 def main():
